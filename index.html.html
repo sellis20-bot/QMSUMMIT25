@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNC Quality Matters Summit 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav {
+            background: #8B2635;
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-link {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .nav-link.register {
+            background-color: white;
+            color: #8B2635;
+        }
+        
+        .nav-link.register:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .page {
+            display: none;
+            min-height: calc(100vh - 80px);
+            padding: 40px 0;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #8B2635, #A73145);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        .event-details {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .detail {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            background-color: white;
+            color: #8B2635;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-2px);
+        }
+        
+        .btn-primary {
+            background-color: #8B2635;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #722030;
+        }
+        
+        .section {
+            background: white;
+            margin: 30px 0;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section h3 {
+            color: #8B2635;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #8B2635;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .session-grid {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .session-card {
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .session-card:hover {
+            border-color: #8B2635;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(139, 38, 53, 0.1);
+        }
+        
+        .session-card.selected {
+            border-color: #8B2635;
+            background-color: #fef2f2;
+        }
+        
+        .session-card input[type="checkbox"] {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+        
+        .session-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .session-details {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .session-time {
+            display: inline-block;
+            background: #8B2635;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .session-room {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            margin-left: 8px;
+        }
+        
+        .agenda-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        
+        .agenda-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #8B2635, #A73145);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding: 20px 0;
+            margin-left: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 25px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #8B2635;
+        }
+        
+        .timeline-item.keynote {
+            background: linear-gradient(135deg, #fef2f2, #fff);
+            margin: 10px 0;
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #8B2635;
+        }
+        
+        .timeline-time {
+            font-weight: 700;
+            color: #8B2635;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .timeline-presenter {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .confirmation {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: #10b981;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        .summary-box {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .summary-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .selected-sessions {
+            margin-top: 20px;
+        }
+        
+        .selected-session {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #8B2635;
+        }
+        
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: #f3f4f6;
+            border: 3px dashed #8B2635;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 30px auto;
+            color: #8B2635;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .footer {
+            background: #8B2635;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 60px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .event-details {
+                gap: 20px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-container">
+                <div class="nav-brand" onclick="showPage('home')">QM Summit 2025</div>
+                <div class="nav-links">
+                    <button class="nav-link" onclick="showPage('home')">Home</button>
+                    <button class="nav-link" onclick="showPage('agenda')">Agenda</button>
+                    <button class="nav-link" onclick="showPage('keynote')">Keynote</button>
+                    <button class="nav-link" onclick="showPage('parking')">Parking</button>
+                    <button class="nav-link" onclick="showPage('survey')">Survey</button>
+                    <button class="nav-link register" onclick="showPage('register')">Register</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <header class="header">
+            <div class="container">
+                <!-- Logo placeholder -->
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <div style="width: 150px; height: 80px; background: rgba(255,255,255,0.2); border: 3px dashed rgba(255,255,255,0.5); border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 0.9rem;">
+                        QM Summit Logo<br>150x80px
+                    </div>
+                </div>
+                
+                <h1>UNC Quality Matters Summit 2025</h1>
+                <h2>Empowering Educators: Transforming Teaching through Quality Matters</h2>
+                
+                <div class="event-details">
+                    <div class="detail">
+                        <span>📅</span>
+                        <span>September 26, 2025</span>
+                    </div>
+                    <div class="detail">
+                        <span>🕘</span>
+                        <span>9:00 AM - 4:30 PM</span>
+                    </div>
+                    <div class="detail">
+                        <span>📍</span>
+                        <span>NCCU Student Center</span>
+                    </div>
+                </div>
+                
+                <button class="btn" onclick="showPage('register')">Register for Sessions</button>
+            </div>
+        </header>
+
+        <div class="container">
+            <section class="section">
+                <h3>Welcome Message</h3>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 20px;">
+                    Get ready for a day of inspiration, collaboration, and big ideas! This is where educators, 
+                    innovators, and leaders come together to reimagine what's possible in higher education. 
+                    Use this app to plan your experience, find your sessions, and make the most of every moment at the summit.
+                </p>
+                <p style="font-size: 1.1rem; color: #666;">
+                    We're so glad you're here! We hope you have a quality learning experience — and a little bit of fun, too.
+                </p>
+            </section>
+
+            <section class="section" style="background: linear-gradient(135deg, #8B2635, #A73145); color: white;">
+                <h3 style="color: white;">Featured Keynote Speaker</h3>
+                <div style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: rgba(255,255,255,0.2); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; border: 3px dashed rgba(255,255,255,0.5); font-size: 0.9rem;">
+                        Dr. Brooks Photo Here
+                    </div>
+                    <h4 style="font-size: 1.8rem; margin-bottom: 10px; color: white;">Dr. Racheal Brooks</h4>
+                    <p style="font-size: 1.2rem; margin-bottom: 20px; opacity: 0.9;">
+                        Director of Quality Assurance Implementation Solutions at Quality Matters
+                    </p>
+                    <p style="font-size: 1.1rem; margin-bottom: 10px;">
+                        <strong>Keynote Time:</strong> 12:30 PM - 1:15 PM
+                    </p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Registration Page -->
+    <div id="register" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Session Registration</h3>
+                <p style="margin-bottom: 30px; color: #666;">Select the sessions you'd like to attend and we'll email you a confirmation.</p>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>First Name *</label>
+                        <input type="text" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name *</label>
+                        <input type="text" id="lastName" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Email Address *</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Institution</label>
+                        <input type="text" id="institution">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="phone">
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3>Lightning Talks (10:30-11:45 AM)</h3>
+                <p style="margin-bottom: 20px; color: #666;">Select the lightning talks you'd like to attend:</p>
+                
+                <div class="session-grid">
+                    <div class="session-card" onclick="toggleSession(this, 'lt1')">
+                        <input type="checkbox" id="lt1">
+                        <div class="session-title">Student Know the Way: Exploring Student Experience in Online Courses</div>
+                        <div class="session-details">
+                            <span class="session-time">10:30-10:45 AM</span>
+                            <span class="session-room">Room 2128</span>
+                            <br>Presenter: Colleen Smith | Moderator: Dr. Erezi Ogbo-Gebhardt
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'lt2')">
+                        <input type="checkbox" id="lt2">
+                        <div class="session-title">Statistically Speaking: How BSS 3600 is Rethinking Learning Support</div>
+                        <div class="session-details">
+                            <span class="session-time">10:30-10:45 AM</span>
+                            <span class="session-room">Room 2201</span>
+                            <br>Presenter: Arlena Nwosu | Moderator: Dr. Penny Carroll
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'lt3')">
+                        <input type="checkbox" id="lt3">
+                        <div class="session-title">Collaboration Success with Quality Matters and Student Wellbeing</div>
+                        <div class="session-details">
+                            <span class="session-time">10:30-10:45 AM</span>
+                            <span class="session-room">Room 2211</span>
+                            <br>Presenter: Amy Olsen & Brittnay Denning | Moderator: Kima Ellis
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'lt4')">
+                        <input type="checkbox" id="lt4">
+                        <div class="session-title">Faculty Fellows Panel Discussion</div>
+                        <div class="session-details">
+                            <span class="session-time">10:30-11:45 AM</span>
+                            <span class="session-room">Room 2319</span>
+                            <br>Panelists: Dr. Rudolph Bailey, Dr. Pia Anderson Duncan, Jamie Ronan, Dr. Daniel Fisher
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h3>Breakout Sessions (1:30-4:05 PM)</h3>
+                <p style="margin-bottom: 20px; color: #666;">Select the breakout sessions you'd like to attend:</p>
+                
+                <div class="session-grid">
+                    <div class="session-card" onclick="toggleSession(this, 'bs1')">
+                        <input type="checkbox" id="bs1">
+                        <div class="session-title">Mastering the Art of Prompting & Claude Artifacts for Impact</div>
+                        <div class="session-details">
+                            <span class="session-time">1:30-2:15 PM</span>
+                            <span class="session-room">Room 2319 - AI Track</span>
+                            <br>Presenter: Alanna Cates & Shakima Ellis | Moderator: Dr. Marquita Lyons-Smith
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'bs2')">
+                        <input type="checkbox" id="bs2">
+                        <div class="session-title">QM Standards to Optimize Meaningful Learning</div>
+                        <div class="session-details">
+                            <span class="session-time">1:30-2:15 PM</span>
+                            <span class="session-room">Room 2211 - Course Design</span>
+                            <br>Presenter: Zakaria Jouaibi | Moderator: Dr. Mijon Knight
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'bs3')">
+                        <input type="checkbox" id="bs3">
+                        <div class="session-title">Building AI-Powered Learning Partners</div>
+                        <div class="session-details">
+                            <span class="session-time">2:30-3:15 PM</span>
+                            <span class="session-room">Room 2319 - AI Track</span>
+                            <br>Presenter: Dana Jones | Moderator: Dr. Marquita Lyons-Smith
+                        </div>
+                    </div>
+                    
+                    <div class="session-card" onclick="toggleSession(this, 'bs4')">
+                        <input type="checkbox" id="bs4">
+                        <div class="session-title">From Review to Relationship: Cultivating Faculty Trust</div>
+                        <div class="session-details">
+                            <span class="session-time">2:30-3:15 PM</span>
+                            <span class="session-room">Room 2211 - Course Design</span>
+                            <br>Presenter: Michele Leverett | Moderator: Dr. Mijon Knight
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <button class="btn btn-primary" onclick="submitRegistration()" style="font-size: 1.2rem; padding: 15px 40px;">
+                    Complete Registration
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Page -->
+    <div id="confirmation" class="page">
+        <div class="container">
+            <div class="confirmation">
+                <div class="success-icon">✓</div>
+                <h2 style="color: #10b981; margin-bottom: 20px;">Registration Complete!</h2>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 30px;">
+                    Thank you for registering. Your session selections have been recorded.
+                </p>
+                
+                <div class="summary-box">
+                    <h3 style="margin-bottom: 20px; color: #333;">Registration Summary</h3>
+                    <div id="confirmationDetails"></div>
+                    <div id="selectedSessions" class="selected-sessions"></div>
+                </div>
+                
+                <div style="margin: 30px 0;">
+                    <button class="btn btn-primary" onclick="downloadConfirmation()">Download Confirmation</button>
+                    <button class="btn" onclick="window.print()" style="margin-left: 15px;">Print</button>
+                </div>
+                
+                <button class="btn" onclick="resetForm()">Register Another Person</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Agenda Page -->
+    <div id="agenda" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Summit Agenda - September 26, 2025</h3>
+                
+                <div class="agenda-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-time">9:00-9:45 AM</div>
+                        <div class="timeline-title">Check-In/Continental Breakfast</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:00-10:15 AM</div>
+                        <div class="timeline-title">UNC QM Summit Welcome</div>
+                        <div class="timeline-presenter">Dr. Larrisha McGill-Youngblood, Director, Office of e-Learning</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:15-10:25 AM</div>
+                        <div class="timeline-title">North Carolina Central University Welcome</div>
+                        <div class="timeline-presenter">Dr. Ontario Wooden, Provost & Vice Chancellor for Academic Affairs</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">10:30-11:45 AM</div>
+                        <div class="timeline-title">Lightning Talk Sessions and Panel Discussion</div>
+                    </div>
+                    
+                    <div class="timeline-item keynote">
+                        <div class="timeline-time">12:00-1:15 PM</div>
+                        <div class="timeline-title">Luncheon and Keynote</div>
+                        <div style="margin-left: 20px; margin-top: 15px;">
+                            <div class="timeline-time" style="font-size: 0.9rem; background: #dc2626; color: white; padding: 4px 12px; border-radius: 12px; display: inline-block;">12:25-12:30 PM</div>
+                            <div class="timeline-title" style="font-size: 1rem; margin: 5px 0;">Introduction of the Keynote Speaker</div>
+                            <div class="timeline-presenter">Dr. Larrisha McGill-Youngblood, Director, Office of e-Learning</div>
+                            
+                            <div class="timeline-time" style="font-size: 0.9rem; background: #dc2626; color: white; padding: 4px 12px; border-radius: 12px; display: inline-block; margin-top: 10px;">12:30-1:15 PM</div>
+                            <div class="timeline-title" style="font-size: 1rem; margin: 5px 0;">Keynote Address: Dr. Racheal Brooks</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">1:15-1:25 PM</div>
+                        <div class="timeline-title">Break/Networking Opportunity</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">1:30-4:05 PM</div>
+                        <div class="timeline-title">Breakout Presentation Sessions</div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-time">4:10-4:30 PM</div>
+                        <div class="timeline-title">UNC QM Council Updates/Raffle</div>
+                        <div class="timeline-presenter">Dr. Enoch Park, Chair of the UNC System QM Council & Dr. Larrisha McGill-Youngblood</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Keynote Page -->
+    <div id="keynote" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Keynote Speaker</h3>
+                <div style="display: flex; gap: 30px; align-items: start; flex-wrap: wrap;">
+                    <div style="width: 150px; height: 150px; background: #f3f4f6; border: 3px dashed #8B2635; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #8B2635; font-weight: 600; text-align: center; flex-shrink: 0;">
+                        Dr. Racheal Brooks Photo
+                    </div>
+                    <div style="flex: 1;">
+                        <h4 style="font-size: 2rem; margin-bottom: 10px; color: #8B2635;">Dr. Racheal Brooks</h4>
+                        <p style="font-size: 1.2rem; color: #666; margin-bottom: 15px; font-weight: 600;">
+                            Director of Quality Assurance Implementation Solutions at Quality Matters
+                        </p>
+                        <p style="margin-bottom: 15px;"><strong>Keynote Time:</strong> 12:30 PM - 1:15 PM</p>
+                        <p style="line-height: 1.6; color: #666;">
+                            Dr. Racheal Brooks is a seasoned higher education administrator, educator, and consultant with over 16 years of experience dedicated to advancing teaching and learning. She is the Director of Quality Assurance Implementation Solutions at Quality Matters, where she leads consulting efforts and supports institutions in strengthening online quality assurance. As a faculty member, she teaches online and blended Spanish and graduate-level research methods courses. Previously, Dr. Brooks served as Director of the Office of e-Learning at North Carolina Central University (NCCU) and Co-Chair of the UNC System Quality Matters Council.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Parking & Venue Page -->
+    <div id="parking" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Venue & Parking Information</h3>
+                
+                <div style="background: linear-gradient(135deg, #8B2635, #A73145); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; text-align: center;">
+                    <h4 style="color: white; font-size: 1.5rem; margin-bottom: 10px;">Event Location</h4>
+                    <p style="font-size: 1.2rem; margin-bottom: 5px;">North Carolina Central University Student Center</p>
+                    <p style="opacity: 0.9;">500 Nelson St, Durham, NC 27707</p>
+                </div>
+                
+                <div style="display: grid; gap: 30px;">
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #dc2626;">
+                        <h4 style="color: #dc2626; font-size: 1.3rem; margin-bottom: 15px;">🚗 NCCU Student Center Parking</h4>
+                        <p style="margin-bottom: 10px; font-weight: 600;">Reserved for faculty and staff with valid parking passes</p>
+                        <p style="color: #666; margin-bottom: 10px;">Parking at the NCCU Student Center is available for faculty and staff who have valid NCCU parking passes.</p>
+                        <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                            <p style="margin: 0; color: #856404;"><strong>⚠️ Important:</strong> Please arrive 30-45 minutes early if you plan to park at the Student Center.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #0066cc;">
+                        <h4 style="color: #0066cc; font-size: 1.3rem; margin-bottom: 15px;">🚌 Latham Parking Deck (Recommended)</h4>
+                        <p style="margin-bottom: 15px; font-weight: 600;">701 E Lawson St, Durham, NC 27701</p>
+                        
+                        <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                            <p style="margin: 0 0 10px 0; font-weight: 600; color: #1565c0;">🚐 Free Shuttle Service</p>
+                            <p style="margin: 0; color: #666;">Shuttle runs every 15 minutes to campus</p>
+                        </div>
+                        
+                        <h5 style="margin: 20px 0 10px 0; color: #333;">Parking Options at Latham Deck:</h5>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1e8ed;">
+                                <p style="margin: 0 0 5px 0; font-weight: 600;">👩‍🏫 Faculty & Staff with Decals</p>
+                                <p style="margin: 0; color: #666; font-size: 0.95rem;">Park in designated non-hourly spaces on levels 2-5</p>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1e8ed;">
+                                <p style="margin: 0 0 5px 0; font-weight: 600;">👥 Visitors</p>
+                                <p style="margin: 0; color: #666; font-size: 0.95rem;">Metered parking available for short-term visits. The deck accepts payments through ParkMobile.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #28a745;">
+                        <h4 style="color: #28a745; font-size: 1.3rem; margin-bottom: 15px;">🗺️ Directions</h4>
+                        <p style="margin-bottom: 10px;"><strong>Accessing Student Center Parking:</strong></p>
+                        <p style="color: #666; margin-bottom: 15px;">Enter the Student Center parking deck from East Lawson Street.</p>
+                        
+                        <p style="margin-bottom: 10px;"><strong>Accessing Latham Parking Deck:</strong></p>
+                        <p style="color: #666;">Located at 701 E Lawson St, Durham, NC 27701. Follow signs for shuttle pickup to campus.</p>
+                    </div>
+                </div>
+                
+                <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; margin-top: 30px; text-align: center;">
+                    <h4 style="color: #2d5a2d; margin-bottom: 15px;">💡 Our Recommendation</h4>
+                    <p style="color: #2d5a2d; margin: 0; font-size: 1.1rem;">For the most convenient experience, we recommend using the <strong>Latham Parking Deck</strong> with the free shuttle service. This ensures guaranteed parking and easy transportation to the Student Center.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Survey Page -->
+    <div id="survey" class="page">
+        <div class="container">
+            <section class="section" style="text-align: center;">
+                <h3>Event Survey & Feedback</h3>
+                <p style="font-size: 1.1rem; color: #666; margin-bottom: 30px;">
+                    Help us improve future summits by completing our post-event survey.
+                </p>
+                
+                <div class="qr-placeholder">
+                    Survey QR Code<br>
+                    <small>Replace with actual QR code</small>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 25px; border-radius: 12px; margin: 30px 0;">
+                    <h4 style="margin-bottom: 15px;">How to Complete the Survey:</h4>
+                    <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>Scan the QR code above with your phone's camera</li>
+                        <li>Follow the link to our online survey</li>
+                        <li>Complete all sections (takes about 5-10 minutes)</li>
+                        <li>Submit your responses</li>
+                    </ol>
+                </div>
+                
+                <div style="background: #f3f4f6; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <p style="margin-bottom: 10px;"><strong>Alternative Survey Access:</strong></p>
+                    <p style="color: #666; font-style: italic;">Survey URL will be provided here</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Registration data storage
+        let registrationData = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            institution: '',
+            phone: '',
+            lightningTalks: [],
+            breakoutSessions: []
+        };
+
+        // Navigation function
+        function showPage(pageId) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        // Session selection function
+        function toggleSession(card, sessionId) {
+            const checkbox = document.getElementById(sessionId);
+            
+            // Toggle checkbox state
+            checkbox.checked = !checkbox.checked;
+            
+            // Update visual state
+            if (checkbox.checked) {
+                card.classList.add('selected');
+            } else {
+                card.classList.remove('selected');
+            }
+            
+            // Update registration data
+            updateRegistrationData();
+        }
+        
+        // Update registration data based on checked boxes
+        function updateRegistrationData() {
+            registrationData.lightningTalks = [];
+            registrationData.breakoutSessions = [];
+            
+            // Check all lightning talk checkboxes
+            document.querySelectorAll('input[id^="lt"]').forEach(checkbox => {
+                if (checkbox.checked) {
+                    registrationData.lightningTalks.push(checkbox.id);
+                }
+            });
+            
+            // Check all breakout session checkboxes
+            document.querySelectorAll('input[id^="bs"]').forEach(checkbox => {
+                if (checkbox.checked) {
+                    registrationData.breakoutSessions.push(checkbox.id);
+                }
+            });
+        }
+
+        // Session data for reference
+        const sessionData = {
+            lt1: {title: "Student Know the Way: Exploring Student Experience in Online Courses", time: "10:30-10:45 AM", room: "Room 2128"},
+            lt2: {title: "Statistically Speaking: How BSS 3600 is Rethinking Learning Support", time: "10:30-10:45 AM", room: "Room 2201"},
+            lt3: {title: "Collaboration Success with Quality Matters and Student Wellbeing", time: "10:30-10:45 AM", room: "Room 2211"},
+            lt4: {title: "Faculty Fellows Panel Discussion", time: "10:30-11:45 AM", room: "Room 2319"},
+            bs1: {title: "Mastering the Art of Prompting & Claude Artifacts for Impact", time: "1:30-2:15 PM", room: "Room 2319"},
+            bs2: {title: "QM Standards to Optimize Meaningful Learning", time: "1:30-2:15 PM", room: "Room 2211"},
+            bs3: {title: "Building AI-Powered Learning Partners", time: "2:30-3:15 PM", room: "Room 2319"},
+            bs4: {title: "From Review to Relationship: Cultivating Faculty Trust", time: "2:30-3:15 PM", room: "Room 2211"}
+        };
+
+        // Submit registration function
+        function submitRegistration() {
+            // Get form data
+            registrationData.firstName = document.getElementById('firstName').value;
+            registrationData.lastName = document.getElementById('lastName').value;
+            registrationData.email = document.getElementById('email').value;
+            registrationData.institution = document.getElementById('institution').value;
+            registrationData.phone = document.getElementById('phone').value;
+
+            // Validate required fields
+            if (!registrationData.firstName || !registrationData.lastName || !registrationData.email) {
+                alert('Please fill in all required fields (First Name, Last Name, Email)');
+                return;
+            }
+
+            // Display confirmation
+            displayConfirmation();
+            showPage('confirmation');
+        }
+
+        // Display confirmation details
+        function displayConfirmation() {
+            const detailsDiv = document.getElementById('confirmationDetails');
+            const sessionsDiv = document.getElementById('selectedSessions');
+
+            // Personal details
+            detailsDiv.innerHTML = `
+                <div class="summary-row">
+                    <strong>Name:</strong>
+                    <span>${registrationData.firstName} ${registrationData.lastName}</span>
+                </div>
+                <div class="summary-row">
+                    <strong>Email:</strong>
+                    <span>${registrationData.email}</span>
+                </div>
+                ${registrationData.institution ? `<div class="summary-row"><strong>Institution:</strong><span>${registrationData.institution}</span></div>` : ''}
+                ${registrationData.phone ? `<div class="summary-row"><strong>Phone:</strong><span>${registrationData.phone}</span></div>` : ''}
+                <div class="summary-row">
+                    <strong>Registration ID:</strong>
+                    <span>QM-${Date.now()}</span>
+                </div>
+            `;
+
+            // Selected sessions
+            let sessionsHTML = '';
+            
+            if (registrationData.lightningTalks.length > 0) {
+                sessionsHTML += '<h4 style="margin-top: 20px; color: #8B2635;">Selected Lightning Talks:</h4>';
+                registrationData.lightningTalks.forEach(id => {
+                    const session = sessionData[id];
+                    sessionsHTML += `
+                        <div class="selected-session">
+                            <strong>${session.title}</strong><br>
+                            ${session.time} - ${session.room}
+                        </div>
+                    `;
+                });
+            }
+
+            if (registrationData.breakoutSessions.length > 0) {
+                sessionsHTML += '<h4 style="margin-top: 20px; color: #8B2635;">Selected Breakout Sessions:</h4>';
+                registrationData.breakoutSessions.forEach(id => {
+                    const session = sessionData[id];
+                    sessionsHTML += `
+                        <div class="selected-session">
+                            <strong>${session.title}</strong><br>
+                            ${session.time} - ${session.room}
+                        </div>
+                    `;
+                });
+            }
+
+            sessionsDiv.innerHTML = sessionsHTML;
+        }
+
+        // Download confirmation as styled HTML
+        function downloadConfirmation() {
+            const selectedLightning = registrationData.lightningTalks.map(id => sessionData[id]);
+            const selectedBreakouts = registrationData.breakoutSessions.map(id => sessionData[id]);
+            const registrationId = `QM-${Date.now()}`;
+            const currentDate = new Date().toLocaleDateString();
+            
+            const htmlContent = `<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>QM Summit 2025 Registration Confirmation</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        .header { 
+            background: linear-gradient(135deg, #8B2635, #A73145); 
+            color: white; 
+            padding: 30px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-bottom: 30px;
+        }
+        .header h1 { margin: 0 0 10px 0; font-size: 2rem; }
+        .header h2 { margin: 0 0 20px 0; font-weight: 300; font-size: 1.2rem; }
+        .event-details { 
+            background: #f8f9fa; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0;
+            border-left: 4px solid #8B2635;
+        }
+        .attendee-info { 
+            background: white; 
+            padding: 25px; 
+            border: 2px solid #8B2635; 
+            border-radius: 8px; 
+            margin: 20px 0;
+        }
+        .session-section { 
+            background: #f8f9fa; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin: 20px 0;
+        }
+        .session-item { 
+            background: white; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border-left: 4px solid #8B2635; 
+            border-radius: 4px;
+        }
+        .footer { 
+            background: #8B2635; 
+            color: white; 
+            padding: 20px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-top: 30px;
+        }
+        .reg-id { 
+            text-align: center; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: #8B2635; 
+            margin: 20px 0;
+        }
+        @media print {
+            body { margin: 0; }
+            .header { background: #8B2635 !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>UNC Quality Matters Summit 2025</h1>
+        <h2>Registration Confirmation</h2>
+        <p>Empowering Educators: Transforming Teaching through Quality Matters</p>
+    </div>
+
+    <div class="event-details">
+        <h3 style="color: #8B2635; margin-top: 0;">Event Details</h3>
+        <p><strong>Date:</strong> September 26, 2025</p>
+        <p><strong>Time:</strong> 9:00 AM - 4:30 PM</p>
+        <p><strong>Location:</strong> North Carolina Central University Student Center</p>
+        <p><strong>Address:</strong> 500 Nelson St, Durham, NC 27707</p>
+    </div>
+
+    <div class="attendee-info">
+        <h3 style="color: #8B2635; margin-top: 0;">Attendee Information</h3>
+        <p><strong>Name:</strong> ${registrationData.firstName} ${registrationData.lastName}</p>
+        <p><strong>Email:</strong> ${registrationData.email}</p>
+        ${registrationData.institution ? `<p><strong>Institution:</strong> ${registrationData.institution}</p>` : ''}
+        ${registrationData.phone ? `<p><strong>Phone:</strong> ${registrationData.phone}</p>` : ''}
+    </div>
+
+    <div class="reg-id">
+        Registration ID: ${registrationId}
+    </div>
+
+    ${selectedLightning.length > 0 ? `
+    <div class="session-section">
+        <h3 style="color: #8B2635; margin-top: 0;">Selected Lightning Talks</h3>
+        ${selectedLightning.map(session => `
+            <div class="session-item">
+                <strong>${session.title}</strong><br>
+                <span style="color: #666;">${session.time} | ${session.room}</span>
+            </div>
+        `).join('')}
+    </div>` : ''}
+
+    ${selectedBreakouts.length > 0 ? `
+    <div class="session-section">
+        <h3 style="color: #8B2635; margin-top: 0;">Selected Breakout Sessions</h3>
+        ${selectedBreakouts.map(session => `
+            <div class="session-item">
+                <strong>${session.title}</strong><br>
+                <span style="color: #666;">${session.time} | ${session.room}</span>
+            </div>
+        `).join('')}
+    </div>` : ''}
+
+    <div class="session-section">
+        <h3 style="color: #8B2635; margin-top: 0;">Parking Information</h3>
+        <p><strong>NCCU Student Center:</strong> Reserved for faculty/staff with passes (arrive 30-45 min early)</p>
+        <p><strong>Latham Parking Deck:</strong> 701 E Lawson St, Durham, NC 27701</p>
+        <p><strong>Shuttle Service:</strong> Free shuttle every 15 minutes from Latham Deck to campus</p>
+        <p><strong>Payment:</strong> Visitors can use metered parking (ParkMobile accepted)</p>
+    </div>
+
+    <div class="footer">
+        <h4>Contact Information</h4>
+        <p>Dr. Larrisha McGill-Youngblood: lmcgilly@nccu.edu</p>
+        <p>Dr. Charlotte Russell Cox: ccox33@nccu.edu</p>
+        <p style="margin-top: 20px; font-size: 0.9rem;">Generated: ${currentDate}</p>
+    </div>
+</body>
+</html>`;
+
+            // Create and download HTML file
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'QM_Summit_2025_Registration_Confirmation.html';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Reset form for new registration
+        function resetForm() {
+            registrationData = {
+                firstName: '',
+                lastName: '',
+                email: '',
+                institution: '',
+                phone: '',
+                lightningTalks: [],
+                breakoutSessions: []
+            };
+
+            // Clear form fields
+            document.getElementById('firstName').value = '';
+            document.getElementById('lastName').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('institution').value = '';
+            document.getElementById('phone').value = '';
+
+            // Clear session selections
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const cards = document.querySelectorAll('.session-card');
+            
+            checkboxes.forEach(cb => cb.checked = false);
+            cards.forEach(card => card.classList.remove('selected'));
+
+            showPage('register');
+        }
+
+        // Email functionality (opens default email client)
+        function emailRegistration() {
+            const subject = "QM Summit 2025 Registration Confirmation";
+            const body = `Thank you for registering for the UNC Quality Matters Summit 2025!
+
+Your registration details:
+Name: ${registrationData.firstName} ${registrationData.lastName}
+Email: ${registrationData.email}
+
+Selected sessions: ${registrationData.lightningTalks.length + registrationData.breakoutSessions.length} total
+
+For questions, contact:
+Dr. Larrisha McGill-Youngblood: lmcgilly@nccu.edu
+Dr. Charlotte Russell Cox: ccox33@nccu.edu`;
+
+            window.location.href = `mailto:${registrationData.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+    </script>
+</body>
+</html>
