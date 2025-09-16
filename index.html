@@ -1382,47 +1382,166 @@
         </div>
     </div>
 
-    <!-- Speakers Page -->
-    <div id="speakers" class="page">
-        <div class="container">
-            <section class="section">
-                <h3>Featured Speakers</h3>
-                <p>Speaker information coming soon!</p>
-            </section>
-        </div>
-    </div>
-
-    <!-- Parking Page -->
-    <div id="parking" class="page">
-        <div class="container">
-            <section class="section">
-                <h3>Parking Information</h3>
-                <p>Parking details coming soon!</p>
-            </section>
-        </div>
-    </div>
-
-    <!-- Survey Page -->
-    <div id="survey" class="page">
-        <div class="container">
-            <section class="section">
-                <h3>Event Survey</h3>
-                <p>Survey information coming soon!</p>
-            </section>
-        </div>
-    </div>
-
-    <script>
-        function showPage(pageId) {
-            const pages = document.querySelectorAll('.page');
-            pages.forEach(page => page.classList.remove('active'));
+   <!-- Speakers Page -->
+<div id="speakers" class="page">
+    <div class="container">
+        <section class="section">
+            <h3>Featured Speakers & Presenters</h3>
+            <p style="margin-bottom: 30px; color: #666;">Meet the educators, researchers, and innovators leading our summit sessions.</p>
             
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-        }
-    </script>
-</body>
-</html>
-    
+            <div class="speakers-grid">
+                <div class="speaker-card">
+                    <div class="speaker-header">
+                        <img src="images/Alanna-Cates.jpg" alt="Alanna Cates" class="speaker-photo">
+                        <div class="speaker-info">
+                            <h4>Alanna Cates</h4>
+                            <div class="title">Instructional Designer</div>
+                            <div class="institution">North Carolina Central University</div>
+                        </div>
+                    </div>
+                    <div class="speaker-bio">
+                        Alanna Cates is an instructional designer with the Office of e-Learning at North Carolina Central University, specializing in educational technology integration and systematic course development...
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="speaker-header">
+                        <img src="images/Amy-Olsen.png" alt="Amy Olsen" class="speaker-photo">
+                        <div class="speaker-info">
+                            <h4>Amy Olsen</h4>
+                            <div class="title">Lecturer/Coordinator, Physical Activity and Wellness Program</div>
+                            <div class="institution">University of North Carolina Wilmington</div>
+                        </div>
+                    </div>
+                    <div class="speaker-bio">
+                        Amy Olsen has 20+ years in higher education as an educator, coach, and leader. Her experience includes teaching and curriculum development for wellness and physical activity...
+                    </div>
+                </div>
+
+                <div class="speaker-card">
+                    <div class="speaker-header">
+                        <img src="images/April-Matthias.png" alt="Dr. April Matthias" class="speaker-photo">
+                        <div class="speaker-info">
+                            <h4>Dr. April Matthias</h4>
+                            <div class="title">Professor of Nursing</div>
+                            <div class="institution">University of North Carolina Wilmington</div>
+                        </div>
+                    </div>
+                    <div class="speaker-bio">
+                        Dr. April Matthias is a professor in the School of Nursing at UNCW. Throughout her 25-year career as an academic nurse educator, she has developed and re-designed numerous courses...
+                    </div>
+                </div>
+
+                <!-- Add more speaker cards here for other presenters -->
+            </div>
+        </section>
+    </div>
+</div>
+
+  <!-- Survey Page -->
+<div id="survey" class="page">
+    <div class="container">
+        <section class="section" style="text-align: center;">
+            <h3>Event Survey & Feedback</h3>
+            <p style="font-size: 1.1rem; color: #666; margin-bottom: 40px;">
+                Help us improve future summits and sessions by completing our surveys.
+            </p>
+            
+            <!-- Summit Survey Section -->
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-bottom: 40px; border-left: 4px solid #8B2635;">
+                <h4 style="color: #8B2635; margin-bottom: 20px;">📋 Summit Event Survey</h4>
+                <p style="color: #666; margin-bottom: 20px;">Share your overall experience about the QM Summit 2025 event</p>
+                
+                <img src="images/QR Code QM Summit Event Survey.png" alt="QM Summit Event Survey QR Code" style="width: 200px; height: 200px; margin: 20px auto; border-radius: 12px; border: 3px solid #8B2635;">
+                
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h5 style="margin-bottom: 15px;">How to Complete the Summit Survey:</h5>
+                    <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>Scan the QR code above with your phone's camera</li>
+                        <li>Follow the link to our summit evaluation survey</li>
+                        <li>Rate speakers, sessions, venue, and overall experience</li>
+                        <li>Provide suggestions for future summits</li>
+                        <li>Submit your responses (takes about 5-7 minutes)</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Session Survey Section -->
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #0066cc;">
+                <h4 style="color: #0066cc; margin-bottom: 20px;">📝 Individual Session Survey</h4>
+                <p style="color: #666; margin-bottom: 20px;">Provide feedback on specific sessions you attended</p>
+                
+                <img src="images/QR Code Session Survey.png" alt="Session Survey QR Code" style="width: 200px; height: 200px; margin: 20px auto; border-radius: 12px; border: 3px solid #0066cc;">
+                
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                    <h5 style="margin-bottom: 15px;">How to Complete the Session Survey:</h5>
+                    <ol style="text-align: left; max-width: 400px; margin: 0 auto;">
+                        <li>Scan the QR code above with your phone's camera</li>
+                        <li>Follow the link to our session feedback survey</li>
+                        <li>Select which sessions you attended from the dropdown</li>
+                        <li>Rate content quality, presenter effectiveness, and usefulness</li>
+                        <li>Submit feedback for each session (2-3 minutes per session)</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Additional Info -->
+            <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; margin-top: 30px;">
+                <h4 style="color: #2d5a2d; margin-bottom: 15px;">📊 Why Your Feedback Matters</h4>
+                <p style="color: #2d5a2d; margin: 0; font-size: 1rem;">Your responses help us improve future QM Summit events, select better speakers, enhance session content, and create more valuable learning experiences for educators across the UNC System.</p>
+            </div>
+        </section>
+    </div>
+</div>
+ <!-- Parking Page -->
+<div id="parking" class="page">
+    <div class="container">
+        <section class="section">
+            <h3>Venue & Parking Information</h3>
+            
+            <div style="background: linear-gradient(135deg, #8B2635, #A73145); color: white; padding: 30px; border-radius: 12px; margin-bottom: 30px; text-align: center;">
+                <h4 style="color: white; font-size: 1.5rem; margin-bottom: 10px;">Event Location</h4>
+                <p style="font-size: 1.2rem; margin-bottom: 5px;">North Carolina Central University Student Center</p>
+                <p style="opacity: 0.9;">500 Nelson St, Durham, NC 27707</p>
+            </div>
+            
+            <div style="display: grid; gap: 30px;">
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #dc2626;">
+                    <h4 style="color: #dc2626; font-size: 1.3rem; margin-bottom: 15px;">🚗 NCCU Student Center Parking</h4>
+                    <p style="margin-bottom: 10px; font-weight: 600;">Reserved for faculty and staff with valid parking passes</p>
+                    <p style="color: #666; margin-bottom: 10px;">Parking at the NCCU Student Center is available for faculty and staff who have valid NCCU parking passes.</p>
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <p style="margin: 0; color: #856404;"><strong>⚠️ Important:</strong> Please arrive 30-45 minutes early if you plan to park at the Student Center.</p>
+                    </div>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; border-left: 4px solid #0066cc;">
+                    <h4 style="color: #0066cc; font-size: 1.3rem; margin-bottom: 15px;">🚌 Latham Parking Deck (Recommended)</h4>
+                    <p style="margin-bottom: 15px; font-weight: 600;">701 E Lawson St, Durham, NC 27701</p>
+                    
+                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                        <p style="margin: 0 0 10px 0; font-weight: 600; color: #1565c0;">🚐 Free Shuttle Service</p>
+                        <p style="margin: 0; color: #666;">Shuttle runs every 15 minutes to campus</p>
+                    </div>
+                    
+                    <h5 style="margin: 20px 0 10px 0; color: #333;">Parking Options at Latham Deck:</h5>
+                    <div style="display: grid; gap: 15px;">
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1e8ed;">
+                            <p style="margin: 0 0 5px 0; font-weight: 600;">👩‍🏫 Faculty & Staff with Decals</p>
+                            <p style="margin: 0; color: #666; font-size: 0.95rem;">Park in designated non-hourly spaces on levels 2-5</p>
+                        </div>
+                        <div style="background: white; padding: 15px; border-radius: 8px; border: 1px solid #e1e8ed;">
+                            <p style="margin: 0 0 5px 0; font-weight: 600;">👥 Visitors</p>
+                            <p style="margin: 0; color: #666; font-size: 0.95rem;">Metered parking available for short-term visits. The deck accepts payments through ParkMobile.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="background: #e8f5e8; padding: 25px; border-radius: 12px; margin-top: 30px; text-align: center;">
+                    <h4 style="color: #2d5a2d; margin-bottom: 15px;">💡 Our Recommendation</h4>
+                    <p style="color: #2d5a2d; margin: 0; font-size: 1.1rem;">For the most convenient experience, we recommend using the <strong>Latham Parking Deck</strong> with the free shuttle service.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>   
