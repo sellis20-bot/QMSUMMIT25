@@ -1362,5 +1362,67 @@
             </section>
         </div>
     </div>
+<!-- Registration Page -->
+    <div id="register" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Session Registration</h3>
+                <p style="margin-bottom: 30px; color: #666;">Registration coming soon! Check back for session selection.</p>
+            </section>
+        </div>
+    </div>
 
+    <!-- Agenda Page -->
+    <div id="agenda" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Summit Agenda</h3>
+                <p>Detailed agenda coming soon!</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Speakers Page -->
+    <div id="speakers" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Featured Speakers</h3>
+                <p>Speaker information coming soon!</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Parking Page -->
+    <div id="parking" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Parking Information</h3>
+                <p>Parking details coming soon!</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- Survey Page -->
+    <div id="survey" class="page">
+        <div class="container">
+            <section class="section">
+                <h3>Event Survey</h3>
+                <p>Survey information coming soon!</p>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
     
