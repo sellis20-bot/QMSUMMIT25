@@ -551,16 +551,68 @@
             });
         }
 
-        function submitRegistration() {
-            updateRegistrationData();
-            if (!registrationData.firstName || !registrationData.lastName || !registrationData.email) {
-                alert('Please fill in all required fields (First Name, Last Name, Email)');
-                return;
-            }
+function submitRegistration() {
+    updateRegistrationData();
+    if (!registrationData.firstName || !registrationData.lastName || !registrationData.email) {
+        alert('Please fill in all required fields (First Name, Last Name, Email)');
+        return;
+    }
+
+    // Show loading state
+    const submitButton = document.querySelector('.btn-primary');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Submitting...';
+    submitButton.disabled = true;
+
+    // Send to Google Sheets
+    submitToGoogleSheets(registrationData)
+        .then(() => {
             displayConfirmation();
             showPage('confirmation');
-        }
+        })
+        .catch(error => {
+            console.error('Submission error:', error);
+            // Still show confirmation even if backend fails
+            displayConfirmation();
+            showPage('confirmation');
+        })
+        .finally(() => {
+            // Reset button
+            submitButton.textContent = originalText;
+            submitButton.disabled = false;
+        });
+}
+async function submitToGoogleSheets(data) {
+    // Replace 'YOUR_GOOGLE_APPS_SCRIPT_URL' with your actual deployment URL
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzV4mJW5gb7QWOgTqGCGuLvoOop1j7TCyjLUk-mrwhyOyGIxmg09ecYNc-jNKqWOes/exec';
+    
+    const payload = {
+        timestamp: new Date().toISOString(),
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        institution: data.institution || '',
+        phone: data.phone || '',
+        lightningTalks: data.lightningTalks.map(id => sessionData[id]?.title || id).join('; '),
+        breakoutSessions: data.breakoutSessions.map(id => sessionData[id]?.title || id).join('; '),
+        totalSessions: data.lightningTalks.length + data.breakoutSessions.length,
+        registrationId: `QM-${Date.now()}`
+    };
 
+    const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+}
         function displayConfirmation() {
             const detailsDiv = document.getElementById('confirmationDetails');
             const sessionsDiv = document.getElementById('selectedSessions');
